@@ -1,0 +1,3 @@
+Regarding the influence maximization problem with novelty decay, there 
+is an umbiguity in the definition. What is goint to happen when two neigh-
+bours are activated in the same time? Who are we going to choose first? 

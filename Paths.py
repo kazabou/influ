@@ -27,8 +27,6 @@ class Paths:
 
                 if paths:
                     newPathSet = set()
-                    print v
-                    print G.predecessors(v)
                     for path in paths:
                         if path[-1] in G.predecessors(v):
                             newpath = list(path)+[v]

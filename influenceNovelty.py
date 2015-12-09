@@ -44,11 +44,56 @@ def calculateTime(G, path):
 
 
 def calculateInfluence(G, seeds):
+    """
+    we need to calculate the influence as time passes.
+    To do this we need to get the paths that their 
+    delay matches the "current time". Then to calculate 
+    the influence we need to "traverse" the path to check
+    the probabilities.
+    """
     timePathD = makeTimePathDictionary(G, seeds)
     maxTime = max(timePathD.values())
+    probDic = {} # probability for every node
+    for node in seeds:
+        probDic[node] = 1
+    activateTries = {}
+    activateTriesPairs = set()
+    for time in xrange(maxTime+1):
+        # for path which value is equal to the current time
+        for path in [p for p in timePathD if timePathD[p] == time]:
+            print path
+            # pathProb = 1
+            # for i in xrange(len(path)-1):
+            #     pathProb *= probDic[path[i]] * G[path[i]][path[i+1]]['weight']
+            pathProb = probDic[path[-2]] * G[path[-2]][path[-1]]['weight']
 
-    for i in range(maxTime+1)
+            if path[-1] not in  probDic:
+                activateTries[path[-1]] = 1
+                activateTriesPairs.add((path[-2],path[-1]))
+                probDic[path[-1]] = pathProb
+            else:
+                if (path[-2], path[-1]) not in activateTriesPairs:
+                    activateTries[path[-1]] += 1
+                    activateTriesPairs.add((path[-2],path[-1]))
+                    probDic[path[-1]] += (1 - probDic[path[-1]])*pathProb*(0.3**(activateTries[path[-1]] - 1))
+                    #probDic[path[-1]] += (1 - probDic[path[-1]])*probDic[path[-2]]*(0.3**(activateTries[path[-1]] - 1))
+
+            print probDic
+
+
+    influence = sum(probDic.values())
+    return influence
+
+
+print calculateInfluence(pG, [1])
+print calculateInfluence(pG, [1,2])
+print calculateInfluence(pG, [1,2,3])
 
 
 
-makeTimePathDictionary(pG, [1])
+                
+
+
+
+
+# makeTimePathDictionary(pG, [1])
