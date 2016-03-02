@@ -1,3 +1,20 @@
 Regarding the influence maximization problem with novelty decay, there 
 is an umbiguity in the definition. What is goint to happen when two neigh-
-bours are activated in the same time? Who are we going to choose first? 
+bours are activated in the same time? Who are we going to choose first?
+
+
+
+tasks:
+
+1) find a way to interact with a social graph, to get
+data from the graph and run an algorithm on it.
+
+When having a big graph, assume for example that there is
+a way to access the data of the facebook graph, and we want to
+run an algorithm on it.
+
+One test would be to find the minimum distance between two
+users, or in a facebook group to find the maximum distance of
+this subgraph.
+
+Or get all the connections of a user.
