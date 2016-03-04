@@ -26,7 +26,6 @@ def makeTimePathDictionary(G, seeds):
     create a dictionary that holds all the time values
     needed to walk through a path
     """
-
     pathObj = Paths()
     pathSet = pathObj.findAllPaths(pG, seeds)
     timePathD = dict()
@@ -84,14 +83,35 @@ def calculateInfluence(G, seeds):
     influence = sum(probDic.values())
     return influence
 
-
+#
 print calculateInfluence(pG, [1])
-print calculateInfluence(pG, [1,2])
-print calculateInfluence(pG, [1,2,3])
+# print calculateInfluence(pG, [1,2])
+# print calculateInfluence(pG, [1,2,3])
 
 
 
-                
+def getAllPaths(graph, seedSet, targetNode):
+    """
+    :param graph:
+    :param seedSet:
+    :param targetNode:
+    :return:
+    """
+
+    for seed in seedSet:
+        for path in nx.all_simple_paths(pG, seed, targetNode):
+            if set([x for x in seedSet if x != seed]).isdisjoint(path):
+                yield path
+
+
+
+
+
+
+for path in getAllPaths(pG, [1,2], 3):
+    print path
+
+
 
 
 
